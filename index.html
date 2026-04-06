@@ -1,1 +1,202 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The New Valdoria - Serveur Minecraft</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>The New Valdoria</h1>
+            <p>Votre aventure commence ici.</p>
+            <div class="server-info">
+                <p>IP du Serveur : <span id="server-ip">151.240.100.21:25582</span> <button id="copy-ip-btn" title="Copier l'IP"><i class="fas fa-copy"></i></button></p>
+                <a href="https://discord.gg/vGBAVhcfWq" target="_blank" class="discord-btn"><i class="fab fa-discord"></i> Rejoindre le Discord</a>
+            </div>
+        </div>
+    </header>
 
+    <section id="main-content" class="container">
+        <div class="server-stats">
+            <h2>Statistiques du Serveur</h2>
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <i class="fas fa-users"></i>
+                    <p>Joueurs Enregistrés</p>
+                    <span id="registered-players">17</span>
+                </div>
+                <div class="stat-item">
+                    <i class="fas fa-box-open"></i>
+                    <p>Caisses Ouvertes</p>
+                    <span id="opened-crates">21</span>
+                </div>
+                <div class="stat-item">
+                    <i class="fas fa-server"></i>
+                    <p>Statut du Serveur</p>
+                    <span id="server-status">En ligne</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="auth-section">
+            <h2>Authentification</h2>
+            <div class="auth-forms">
+                <div class="auth-form login-form">
+                    <h3>Connexion</h3>
+                    <form id="login-form">
+                        <input type="text" placeholder="Nom d'utilisateur" required>
+                        <input type="password" placeholder="Mot de passe" required>
+                        <button type="submit">Se Connecter</button>
+                    </form>
+                </div>
+                <div class="auth-form register-form">
+                    <h3>Inscription</h3>
+                    <form id="register-form">
+                        <input type="text" placeholder="Nom d'utilisateur" required>
+                        <input type="password" placeholder="Mot de passe" required>
+                        <input type="password" placeholder="Confirmer le mot de passe" required>
+                        <button type="submit">S'inscrire</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="shop-section">
+            <h2>Boutique</h2>
+            <div class="shop-items-grid">
+                <div class="shop-item box-item">
+                    <img src="images/wood_box.png" alt="Box Bois">
+                    <h3>Box Bois</h3>
+                    <p>Bientôt disponible</p>
+                    <button disabled>Acheter</button>
+                </div>
+                <div class="shop-item box-item">
+                    <img src="images/iron_box.png" alt="Box Fer">
+                    <h3>Box Fer</h3>
+                    <p>Bientôt disponible</p>
+                    <button disabled>Acheter</button>
+                </div>
+                <div class="shop-item box-item">
+                    <img src="images/gold_box.png" alt="Box Or">
+                    <h3>Box Or</h3>
+                    <p>Bientôt disponible</p>
+                    <button disabled>Acheter</button>
+                </div>
+                <div class="shop-item box-item">
+                    <img src="images/diamond_box.png" alt="Box Diamant">
+                    <h3>Box Diamant</h3>
+                    <p>Bientôt disponible</p>
+                    <button disabled>Acheter</button>
+                </div>
+                <div class="shop-item box-item amethyst-box">
+                    <img src="images/amethyst_box.png" alt="Box Améthyste">
+                    <h3>Box Améthyste</h3>
+                    <p>Prix : 755 <span class="currency">Sous</span></p>
+                    <button id="buy-amethyst-box-btn">Acheter</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="daily-rewards-section">
+            <h2>Récompenses Journalières</h2>
+            <div class="rewards-progress">
+                <div class="progress-bar-container">
+                    <div id="rewards-progress-bar" class="progress-bar"></div>
+                </div>
+                <p id="progress-text">Progression : 0/7 jours</p>
+            </div>
+            <div class="rewards-list">
+                <h3>Récompenses :</h3>
+                <ul>
+                    <li>Jour 1 : 10 Sous</li>
+                    <li>Jour 2 : 15 Sous</li>
+                    <li>Jour 3 : 20 Sous</li>
+                    <li>Jour 4 : 35 Sous</li>
+                    <li>Jour 5 : 45 Sous</li>
+                    <li>Jour 6 : 65 Sous</li>
+                    <li>Jour 7 : 115 Sous</li>
+                </ul>
+            </div>
+            <button id="claim-reward-btn" disabled>Récupérer récompense</button>
+            <p id="reward-message"></p>
+        </div>
+    </section>
+
+    <aside class="admin-panel">
+        <h2>Panel Administrateur</h2>
+        <div class="admin-login">
+            <input type="text" id="admin-username" placeholder="Nom d'utilisateur" value="admin">
+            <input type="password" id="admin-password" placeholder="Mot de passe" value="743474">
+            <button id="admin-login-btn">Se Connecter</button>
+        </div>
+        <div id="admin-dashboard" style="display: none;">
+            <h3>Tableau de Bord</h3>
+            <div class="admin-sections">
+                <button onclick="showAdminSection('user-management')">Gestion Utilisateurs</button>
+                <button onclick="showAdminSection('stats-management')">Gestion Statistiques</button>
+                <button onclick="showAdminSection('shop-management')">Gestion Boutique</button>
+                <button onclick="showAdminSection('rewards-management')">Gestion Récompenses</button>
+            </div>
+            <div id="user-management" class="admin-section">
+                <h4>Gestion des Utilisateurs</h4>
+                <!-- Contenu de gestion des utilisateurs -->
+            </div>
+            <div id="stats-management" class="admin-section" style="display: none;">
+                <h4>Gestion des Statistiques</h4>
+                <!-- Contenu de gestion des statistiques -->
+            </div>
+            <div id="shop-management" class="admin-section" style="display: none;">
+                <h4>Gestion de la Boutique</h4>
+                <!-- Contenu de gestion de la boutique -->
+            </div>
+            <div id="rewards-management" class="admin-section" style="display: none;">
+                <h4>Gestion des Récompenses</h4>
+                <!-- Contenu de gestion des récompenses -->
+            </div>
+        </div>
+    </aside>
+
+    <section id="bonus-features" class="container">
+        <h2>Bonus</h2>
+        <div class="bonus-grid">
+            <div class="bonus-item">
+                <h3>Dashboard</h3>
+                <div id="dashboard-charts">
+                    <!-- Graphiques -->
+                </div>
+            </div>
+            <div class="bonus-item">
+                <h3>Leaderboard</h3>
+                <ol id="leaderboard-list">
+                    <!-- Classements -->
+                </ol>
+            </div>
+            <div class="bonus-item">
+                <h3>Galerie</h3>
+                <div class="gallery-container">
+                    <!-- Images -->
+                </div>
+            </div>
+            <div class="bonus-item">
+                <h3>Codes Promo</h3>
+                <form id="promo-code-form">
+                    <input type="text" placeholder="Entrez votre code promo">
+                    <button type="submit">Appliquer</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 The New Valdoria. Tous droits réservés.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
